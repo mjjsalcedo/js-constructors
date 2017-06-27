@@ -117,7 +117,7 @@
    */
 
    Spellcaster.prototype.spendMana = function(cost){
-     if(this.mana > cost){
+     if(this.mana >= cost){
         this.mana -= cost;
         return true;
      } else {
@@ -157,17 +157,28 @@
       if( spell instanceof Spell || spell instanceof DamageSpell){
         if(spell instanceof DamageSpell){
           if( target instanceof Spellcaster){
-            if( this.mana > spell.cost){
+            if( this.mana >= spell.cost){
               if(this.spendMana(spell.cost)){
               target.inflictDamage(spell.damage);
               return true;
-              }
+                }else {
+                return false;
+                }
+            }else{
+                return false;
           }
-           else return false;
+        }else{
+            return false;
         }
-
-        return false;
+      } else {
+            if(this.mana >= spell.cost){
+            this.spendMana(spell.cost);
+            return true;
+            } else {
+              return false;
+            }
+          }
+      }else{
+            return false;
         }
-      }
-      return false;
-   };
+    };
