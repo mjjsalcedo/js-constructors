@@ -156,11 +156,13 @@
 
       if( spell instanceof Spell){
         if( spell instanceof DamageSpell){
+          if( target instanceof Spellcaster){
           if( this.mana > spell.cost){
               this.mana -= spell.cost;
               return true;
-          } else return false;
+          }
         }
+        }
+        return false;
       }
-
    };
