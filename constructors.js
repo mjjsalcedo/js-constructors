@@ -151,3 +151,16 @@
    * @param  {Spellcaster} target         The spell target to be inflicted.
    * @return {boolean}                    Whether the spell was successfully cast.
    */
+
+   Spellcaster.prototype.invoke = function(spell, target){
+
+      if( spell instanceof Spell){
+        if( spell instanceof DamageSpell){
+          if( this.mana > spell.cost){
+              this.mana -= spell.cost;
+              return true;
+          } else return false;
+        }
+      }
+
+   };
