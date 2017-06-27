@@ -154,16 +154,20 @@
 
    Spellcaster.prototype.invoke = function(spell, target){
 
-      if( spell instanceof Spell){
-        if( spell instanceof DamageSpell){
+      if( spell instanceof Spell || spell instanceof DamageSpell){
+        if(spell instanceof DamageSpell){
           if( target instanceof Spellcaster){
             if( this.mana > spell.cost){
-              this.mana -= spell.cost;
-              target.health -= spell.damage;
+              if(this.spendMana(spell.cost)){
+              target.inflictDamage(spell.damage);
               return true;
+              }
           }
+           else return false;
         }
-        }
+
         return false;
+        }
       }
+      return false;
    };
