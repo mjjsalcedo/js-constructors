@@ -157,8 +157,9 @@
       if( spell instanceof Spell){
         if( spell instanceof DamageSpell){
           if( target instanceof Spellcaster){
-          if( this.mana > spell.cost){
+            if( this.mana > spell.cost){
               this.mana -= spell.cost;
+              target.health -= spell.damage;
               return true;
           }
         }
